@@ -18,6 +18,24 @@ struct FontSelector: View {
         .resetter($theme.size, defaultVal.size)
       
       Divider()
+			HStack(spacing: 2) {
+			Picker("Font", selection: $theme.font) {
+									Text("System").tag("")
+									ForEach(UIFont.familyNames.sorted(), id: \.self) { family in
+										//ForEach(UIFont.fontNames(forFamilyName: family), id: \.self) { font in
+																			Label(family, systemImage: "a.circle")
+										//PickerRow(text: family)
+															}//}
+								}
+				.resetter($theme.font, defaultVal.font)
+				
+			Text("This is a Test.")
+				.font(.custom(theme.font, size: theme.size))
+			.fontWeight(theme.weight.t)
+				}
+			.padding(.horizontal, 16)
+			
+			Divider()
       
       HStack(spacing: 2) {
         ForEach(CodableFontWeight.allCases, id: \.self) { weight in
@@ -44,4 +62,14 @@ struct FontSelector: View {
       }
     }
   }
+}
+
+struct PickerRow: View {
+		let text: String
+		var body: some View {
+				Text(text)
+						//.foregroundColor(.red)
+						.font(.custom(text, size: 16))
+						//.italic()
+		}
 }

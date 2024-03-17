@@ -16,7 +16,7 @@ extension RedditAPI {
     if let subreddit, let subName = SubMetaFormatter(name: subreddit).name {
       url += "/r/\(subName)"
     }
-    url += "/search.json"
+    url += "/search.json?raw_json=1"
     print(advanced)
     switch await self.doRequest(url, method: .get, params: advanced, paramsLocation: .queryString, decodable: Listing<Either<PostData, CommentData>>.self)  {
     case .success(let data):

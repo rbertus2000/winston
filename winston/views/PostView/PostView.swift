@@ -191,7 +191,7 @@ private struct Toolbar: ToolbarContent {
   @Binding var sort: CommentSortOption
   
   var body: some ToolbarContent {
-    if !IPAD {
+    if true {
       ToolbarItem(id: "postview-title", placement: .principal) {
         VStack {
           Text(title)

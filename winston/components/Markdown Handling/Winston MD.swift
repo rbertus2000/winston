@@ -10,13 +10,19 @@ import MarkdownUI
 
 extension Theme {
   /// Winston Markdown theme.
-  public static func winstonMarkdown(fontSize: CGFloat, lineSpacing: CGFloat = 0.2, textSelection: Bool = false) -> Theme {
+  public static func winstonMarkdown(font: String = "",fontSize: CGFloat, fontWeight: Font.Weight = .regular, lineSpacing: CGFloat = 0.2, textSelection: Bool = false) -> Theme {
     let theme = Theme()
       .text {
         FontSize(fontSize)
       }
       .paragraph { configuration in
         configuration.label
+					.markdownTextStyle {
+						FontWeight(fontWeight)
+						if !font.isEmpty {
+						FontFamily(.custom(font))
+						}
+					}
           .lineSpacing(lineSpacing)
           .fontSize(fontSize)
           .textSelection(WinstonTextSelectability(allowsSelection: textSelection))
@@ -25,6 +31,10 @@ extension Theme {
         configuration.label
           .markdownTextStyle {
             FontSize(fontSize * 2)
+						FontWeight(fontWeight)
+						if !font.isEmpty {
+						FontFamily(.custom(font))
+						}
           }
           .textSelection(WinstonTextSelectability(allowsSelection: textSelection))
       }
@@ -32,6 +42,10 @@ extension Theme {
         configuration.label
           .markdownTextStyle {
             FontSize(fontSize * 1.5)
+						FontWeight(fontWeight)
+						if !font.isEmpty {
+						FontFamily(.custom(font))
+						}
           }
           .textSelection(WinstonTextSelectability(allowsSelection: textSelection))
       }
@@ -39,11 +53,21 @@ extension Theme {
         configuration.label
           .markdownTextStyle {
             FontSize(fontSize * 1.25)
+						FontWeight(fontWeight)
+						if !font.isEmpty {
+						FontFamily(.custom(font))
+						}
           }
           .textSelection(WinstonTextSelectability(allowsSelection: textSelection))
       }
       .listItem { configuration in
         configuration.label
+					.markdownTextStyle {
+						FontWeight(fontWeight)
+						if !font.isEmpty {
+						FontFamily(.custom(font))
+						}
+					}
           .markdownMargin(top: .em(0.3))
           .textSelection(WinstonTextSelectability(allowsSelection: textSelection))
       }

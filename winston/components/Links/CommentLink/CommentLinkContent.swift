@@ -222,7 +222,7 @@ struct CommentLinkContent: View {
                   } else {
                     HStack {
                       Markdown(MarkdownUtil.formatForMarkdown(body, showSpoiler: showSpoiler))
-                        .markdownTheme(.winstonMarkdown(fontSize: theme.theme.bodyText.size, lineSpacing: theme.theme.linespacing, textSelection: selectable))
+                        .markdownTheme(.winstonMarkdown(font: theme.theme.bodyText.font, fontSize: theme.theme.bodyText.size, fontWeight: theme.theme.bodyText.weight.t, lineSpacing: theme.theme.linespacing, textSelection: selectable))
                         .fixedSize(horizontal: false, vertical: true)
                       
                       if MarkdownUtil.containsSpoiler(body) {
