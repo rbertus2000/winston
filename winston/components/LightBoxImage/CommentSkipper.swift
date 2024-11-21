@@ -56,7 +56,7 @@ struct CommentSkipper: ViewModifier {
   }
   
   private func jumpToNextComment() {
-    if topVisibleCommentId == nil, let id = comments.first?.id {
+    if topVisibleCommentId == nil, let id = comments.first?.id ?? Optional("comments-header") {
       reader.scrollTo(id, anchor: .top)
       topVisibleCommentId = id
       return

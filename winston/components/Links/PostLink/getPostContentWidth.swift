@@ -111,6 +111,8 @@ func getPostDimensions(post: Post, winstonData: PostWinstonData? = nil, columnWi
           ACC_mediaSize = defaultMediaSize(video.size)
         case .streamable(_):
           ACC_mediaSize = CGSize(width: contentWidth, height: 100)
+        case .redgifs(_):
+          ACC_mediaSize = CGSize(width: contentWidth, height: 100)
         case .yt(let ytMediaExtracted):
           let size = ytMediaExtracted.size
           let actualHeight = (contentWidth * CGFloat(size.height)) / CGFloat(size.width)
@@ -142,7 +144,7 @@ func getPostDimensions(post: Post, winstonData: PostWinstonData? = nil, columnWi
     
     let compactTitleWidth = postGeneralSpacing + VotesCluster.verticalWidth + postGeneralSpacing + compactMediaSize.width
     
-    let titleContentWidth = contentWidth - (compact ? compactTitleWidth : 0)
+    let titleContentWidth = contentWidth * (IPAD ? 1.5 : 1) - (compact ? compactTitleWidth : 0)
     
     var appendStr = ""
     let titleAttr = NSMutableAttributedString(string: title, attributes: [.font: UIFont.systemFont(ofSize: theme.titleText.size + 0.35, weight: theme.titleText.weight.ut)])

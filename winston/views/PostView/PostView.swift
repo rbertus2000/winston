@@ -31,6 +31,7 @@ struct PostView: View, Equatable {
   @SilentState private var topVisibleCommentId: String? = nil
   @SilentState private var previousScrollTarget: String? = nil
   @State private var comments: [Comment] = []
+	@Default(.SubredditFeedDefSettings) private var subFeedSettings
   
   init(post: Post, subreddit: Subreddit, forceCollapse: Bool = false, highlightID: String? = nil) {
     self.post = post
@@ -67,7 +68,7 @@ struct PostView: View, Equatable {
   
   var body: some View {
     let navtitle: String = post.data?.title ?? "no title"
-    let subnavtitle: String = "r/\(post.data?.subreddit ?? "no sub") \u{2022} " + String(localized:"\(post.data?.num_comments ?? 0) comments")
+    let subnavtitle: String = "\(subFeedSettings.showPrefixOnFeedTitle ? "r/" : "")\(post.data?.subreddit ?? "no sub") \u{2022} " + String(localized:"\(post.data?.num_comments ?? 0) comments")
     let commentsHPad = selectedTheme.comments.theme.outerHPadding > 0 ? selectedTheme.comments.theme.outerHPadding : selectedTheme.comments.theme.innerPadding.horizontal
     GeometryReader { geometryReader in
       ScrollViewReader { proxy in
@@ -191,7 +192,7 @@ private struct Toolbar: ToolbarContent {
   @Binding var sort: CommentSortOption
   
   var body: some ToolbarContent {
-    if !IPAD {
+    if true {
       ToolbarItem(id: "postview-title", placement: .principal) {
         VStack {
           Text(title)

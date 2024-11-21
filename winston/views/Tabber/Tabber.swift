@@ -21,6 +21,7 @@ struct Tabber: View, Equatable {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.setTabBarHeight) private var setTabBarHeight
     @Default(.AppearanceDefSettings) private var appearanceDefSettings
+    @Environment(\.horizontalSizeClass) var originalSizeClass
     
     @State var sharedTheme: ThemeData? = nil
     
@@ -57,6 +58,7 @@ struct Tabber: View, Equatable {
             WithCredentialOnly(credential: redditCredentialsManager.selectedCredential) {
                 SubredditsStack(router: nav[.posts])
             }
+            .environment(\.horizontalSizeClass, originalSizeClass) 
             .measureTabBar(setTabBarHeight)
             .tag(Nav.TabIdentifier.posts)
             .tabItem { Label("Posts", systemImage: "doc.text.image") }
@@ -64,6 +66,7 @@ struct Tabber: View, Equatable {
             WithCredentialOnly(credential: redditCredentialsManager.selectedCredential) {
                 Inbox(router: nav[.inbox])
             }
+            .environment(\.horizontalSizeClass, originalSizeClass) 
             .measureTabBar(setTabBarHeight)
             .tag(Nav.TabIdentifier.inbox)
             .tabItem { Label("Inbox", systemImage: "bell.fill") }
@@ -71,6 +74,7 @@ struct Tabber: View, Equatable {
             WithCredentialOnly(credential: redditCredentialsManager.selectedCredential) {
                 Me(router: nav[.me])
             }
+            .environment(\.horizontalSizeClass, originalSizeClass) 
             .measureTabBar(setTabBarHeight)
             .tag(Nav.TabIdentifier.me)
             .tabItem {
@@ -82,16 +86,19 @@ struct Tabber: View, Equatable {
             WithCredentialOnly(credential: redditCredentialsManager.selectedCredential) {
                 Search(router: nav[.search])
             }
+            .environment(\.horizontalSizeClass, originalSizeClass) 
             .measureTabBar(setTabBarHeight)
             .tag(Nav.TabIdentifier.search)
             .tabItem { Label("Search", systemImage: "magnifyingglass") }
             
             Settings(router: nav[.settings])
+            .environment(\.horizontalSizeClass, originalSizeClass) 
                 .measureTabBar(setTabBarHeight)
                 .tag(Nav.TabIdentifier.settings)
                 .tabItem { Label("Settings", systemImage: "gearshape.fill") }
             
         }
+        .environment(\.horizontalSizeClass, .compact) 
         .overlay(TabBarOverlay(meTabTap: meTabTap), alignment: .bottom)
         .openFromWebListener()
         .themeFetchingListener() // From WinstonAPI

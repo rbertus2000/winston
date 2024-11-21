@@ -42,7 +42,7 @@ struct UserView: View {
     
     var body: some View {
         
-        RedditListingFeed(feedId: user.fullname, title: "\(subFeedSettings.showPrefixOnFeedTitle ? "u/" : "")\(user.data?.name ?? "Loading...")", theme: selectedTheme.lists.bg, fetch: fetcher, header: {
+        RedditListingFeed(feedId: user.fullname, showSubInPosts: true, title: "\(subFeedSettings.showPrefixOnFeedTitle ? "u/" : "")\(user.data?.name ?? "Loading...")", theme: selectedTheme.lists.bg, fetch: fetcher, header: {
             VStack(spacing: 16) {
                 if let data = user.data {
                     Group {
